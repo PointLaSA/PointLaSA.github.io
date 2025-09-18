@@ -1,0 +1,707 @@
+<!DOCTYPE html> <!--告诉浏览器这是一个 HTML5 页面-->
+<html>  <!--网页的所有内容都在html中-->
+
+<head>  <!--网页的设置-->
+    <!-- Google 分析工具代码 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55V1E709SK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-55V1E709SK');
+    </script>
+    <!--网页设置部分-->
+    <meta charset="utf-8">
+    <meta name="description"
+          content="Triadic Positional Encoding for Point Clouds with Multi-Scale, Local, and Relative Embeddings">
+    <meta name="keywords"
+          content="Point Cloud, Positional Encoding, Relative Position, Multi-Scale, Local Geometry, Relative Positional Encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!--手机显示设置-->
+    <title>PointTriPE: Triadic Positional Encoding for Point Clouds with Multi-Scale, Local, and Relative Embeddings
+    </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/xxxxx"></script>
+    <!--比如有多少人访问了你的网站，他们点击了什么,把后面收集到的数据都关联到这个项目上-->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+    <!--给网页加载一个 CSS static文件字体，滚动....-->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <!--给网页引入 JavaScript 脚本，用于添加交互功能，比如按钮点击、图片轮播、滑动条等行为文件-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/script.js"></script>
+
+</head>
+
+
+<!--下面开始正文-->
+<body>
+<section class="hero"><!-- Bulma 的 hero 区块，通常用于顶部主视觉区域 -->
+    <div class="hero-body"><!-- 内容主体 -->
+        <div class="container is-max-desktop"><!-- 设置最大宽度的容器 -->
+            <div class="columns is-centered"> <!-- 水平居中列 -->
+                <div class="column has-text-centered"><!-- 单列 + 文本居中 -->
+                    <h1 class="title is-1 publication-title">
+                        <span style="color: #4CAF50 ;font-weight: bolder;"></span>
+                        PointLaSA: Learnable Spatial Anchors for Feature Aggregation in Point Clouds
+                    </h1><!--题目信息-->
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"> <a href="">Anonymous</a> </span>
+                    </div>
+
+                    <!-- TODO: update paper and video link once upload -->
+
+                    <!--这块代码的作用是展示两个按钮链接：一个是论文PDF，一个是代码GitHub-->
+                    <div class="column has-text-centered">
+                        <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                       style="pointer-events: none; cursor: default;">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>The paper will be released</span>
+                  </a>
+                  </span>
+                        <!-- Code Link. -->
+                        <span class="link-block">
+                    <!-- href="https://github.com/"-->
+                    <a class="external-link button is-normal is-rounded is-dark"
+                       style="pointer-events: none; cursor: default;">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>The code will be released</span>
+                    </a>
+                  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Overview</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Efficient and robust feature aggregation is essential for point cloud understanding tasks
+                        such as classification and segmentation.
+                        Most existing methods employ k-nearest neighbor (KNN) search with fixed spatial anchors
+                        (FSA), which limits their ability to adapt to complex and diverse geometric patterns.
+                        To overcome this limitation, we propose PointLaSA, a novel framework based on
+                        Learnable Spatial Anchors for multi-head, multi-scale feature aggregation.
+                        Specifically, each attention head predicts an anchor offset to generate geometry-adaptive
+                        query points, while different neighborhood sizes across heads capture complementary local
+                        contexts.
+                        The fused features from all heads yield expressive point representations that are both
+                        flexible and discriminative.
+                        Extensive experiments on standard benchmarks demonstrate that PointLaSA consistently
+                        outperforms fixed-anchor KNN baselines across classification and segmentation tasks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Concurrent Work. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Method Overview</h2>
+                <div class="content has-text-justified">
+                    <img src="./dynamic/result/framework.png">
+                    <p><strong>Overall architecture of PointLaSA. </strong> We adopt a U-Net
+                        architecture to support both classification and segmentation tasks.
+                        In the encoder, a point feature transformation module first projects point features into a
+                        higher-dimensional space, followed by downsampling via farthest point sampling.
+                        Next, a spatial encoding module augments point descriptors with positional information,
+                        enriching local representations.
+                        At each Local Aggregation stage, we replace the conventional fixed-anchor KNN with the
+                        proposed Learnable Spatial Anchors, enabling geometry-adaptive feature aggregation.
+                        The decoder progressively restores spatial resolution through nearest-neighbor interpolation
+                        and feature propagation, and task-specific heads are applied for segmentation and
+                        classification.
+                        Throughout the network, we deliberately avoid complex feature extractors and instead employ
+                        lightweight MLPs and max pooling, allocating more computation to neighborhood selection for
+                        both efficiency and model compactness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <div style="text-align: center;">
+                        <img src="./dynamic/result/dp.png"
+                             style="max-width: 50%; height: auto; display: inline-block;">
+                    </div>
+                    <p><strong>Comparison between FSA-KNN and the proposed LaSA-KNN. </strong> FSA-KNN aggregates
+                        features within a single fixed-scale neighborhood.
+                        By contrast, LaSA-KNN introduces learnable anchor shifts to adaptively adjust point
+                        positions, and leverages multi-head, multi-scale KNN to construct diverse neighborhoods,
+                        enabling richer geometric perception and more discriminative feature extraction.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <h2 class="title is-3 has-text-centered">Experiments</h2>
+                    <p>We evaluate our model on five widely-used point cloud benchmarks spanning three
+                        representative tasks. For shape
+                        classification, we use ModelNet40 and ScanObjectNN; for part segmentation, ShapeNetPart; and
+                        for indoor scene semantic segmentation, ScanNet v2.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <h2 class="title is-3 has-text-centered">Experiments</h2>
+                    <div class="content has-text-centered">
+                    <p><strong>Network configurations used for different datasets.</strong></p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Dataset</th>
+                                <th>Dimension</th>
+                                <th>Points</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>ScanObjectNN</td>
+                                <td>96-192-384</td>
+                                <td>64-256-1024</td>
+                            </tr>
+                            <tr>
+                                <td>ModelNet40</td>
+                                <td>96-192-384</td>
+                                <td>64-256-1024</td>
+                            </tr>
+                            <tr>
+                                <td>ShapeNetPart</td>
+                                <td>96-192-320-512</td>
+                                <td>64-192-512-2048</td>
+
+                            </tr>
+                            <tr>
+                                <td>ScanNet v2</td>
+                                <td>64-96-160-288-512</td>
+                                <td>--</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="content has-text-centered">
+                    <p><strong>Classification results on ModelNet40</strong></p>
+                    <p><small>OA: overall accuracy. mAcc: mean per-class accuracy.</small></p>
+                </div>
+                <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>OA (%)</th>
+                        <th>mAcc (%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>PointNet</td>
+                        <td>89.2</td>
+                        <td>86.0</td>
+                    </tr>
+                    <tr>
+                        <td>PointNet++</td>
+                        <td>93.0</td>
+                        <td>90.7</td>
+                    </tr>
+                    <tr>
+                        <td>DGCNN</td>
+                        <td>92.9</td>
+                        <td>90.2</td>
+                    </tr>
+                    <tr>
+                        <td>PCT</td>
+                        <td>93.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PTv1</td>
+                        <td>93.7</td>
+                        <td>90.6</td>
+                    </tr>
+                    <tr>
+                        <td>CurveNet</td>
+                        <td>93.8</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PointMLP</td>
+                        <td>94.1</td>
+                        <td>91.3</td>
+                    </tr>
+                    <tr>
+                        <td>GBNet</td>
+                        <td>93.8</td>
+                        <td>91.0</td>
+                    </tr>
+                    <tr>
+                        <td>PointNeXt</td>
+                        <td>94.0</td>
+                        <td>91.1</td>
+                    </tr>
+                    <tr>
+                        <td>PTv2</td>
+                        <td>94.2</td>
+                        <td>91.6</td>
+                    </tr>
+                    <tr>
+                        <td>DualMLP</td>
+                        <td>93.7</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PointLaSA (ours)</strong></td>
+                        <td><strong>94.2</strong></td>
+                        <td><strong>91.8</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Part Segmentation Results on ShapeNetPart -->
+            <div class="column">
+                <div class="content has-text-centered">
+                    <p><strong>Classification results on ModelNet40</strong></p>
+                    <p><small>“OA” denotes overall accuracy; “mACC” denotes mean class accuracy.</small></p>
+                </div>
+                <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>OA (%)</th>
+                        <th>mACC (%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>PointNet</td>
+                        <td>75.2</td>
+                        <td>71.4</td>
+                    </tr>
+                    <tr>
+                        <td>PointNet++</td>
+                        <td>86.2</td>
+                        <td>84.4</td>
+                    </tr>
+                    <tr>
+                        <td>DGCNN</td>
+                        <td>86.1</td>
+                        <td>84.3</td>
+                    </tr>
+                    <tr>
+                        <td>PointMLP</td>
+                        <td>87.7</td>
+                        <td>86.4</td>
+                    </tr>
+                    <tr>
+                        <td>PointNeXt</td>
+                        <td>88.2</td>
+                        <td>86.8</td>
+                    </tr>
+                    <tr>
+                        <td>SPoTr</td>
+                        <td>88.6</td>
+                        <td>86.8</td>
+                    </tr>
+                    <tr>
+                        <td>point2vec</td>
+                        <td>87.5</td>
+                        <td>86.0</td>
+                    </tr>
+                    <tr>
+                        <td>CurveCloud</td>
+                        <td>89.1</td>
+                        <td>86.5</td>
+                    </tr>
+                    <tr>
+                        <td>KPConvX</td>
+                        <td>89.3</td>
+                        <td>88.1</td>
+                    </tr>
+                    <tr>
+                        <td>PointBERT*</td>
+                        <td>83.1</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PointMAE*</td>
+                        <td>85.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PPT*</td>
+                        <td>89.5</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PointLaSA (ours)</strong></td>
+                        <td><strong>90.2</strong></td>
+                        <td><strong>89.2</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-variable is-8">
+
+            <!-- Part Segmentation Results -->
+            <div class="column">
+                <div class="content">
+                    <p><strong>Part segmentation results (mean IoU %) on ShapeNetPart.</strong><br>
+                        “Ins. mIoU” denotes instance-average mIoU; “Cls. mIoU” denotes class-average
+                        mIoU.
+                    </p>
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Ins. mIoU</th>
+                            <th>Cls. mIoU</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>PointNet</td>
+                            <td>83.7</td>
+                            <td>80.4</td>
+                        </tr>
+                        <tr>
+                            <td>PointNet++</td>
+                            <td>85.1</td>
+                            <td>81.9</td>
+                        </tr>
+                        <tr>
+                            <td>DGCNN</td>
+                            <td>85.2</td>
+                            <td>82.3</td>
+                        </tr>
+                        <tr>
+                            <td>PTv1</td>
+                            <td>86.6</td>
+                            <td>83.7</td>
+                        </tr>
+                        <tr>
+                            <td>AGCN</td>
+                            <td>86.9</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td>RSCNN</td>
+                            <td>86.2</td>
+                            <td>84.0</td>
+                        </tr>
+                        <tr>
+                            <td>CurveNet</td>
+                            <td>86.8</td>
+                            <td>84.2</td>
+                        </tr>
+                        <tr>
+                            <td>OTMae3D</td>
+                            <td>86.8</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td>PointJEPA</td>
+                            <td>83.9</td>
+                            <td>85.8</td>
+                        </tr>
+                        <tr>
+                            <td>AdaCrossNet</td>
+                            <td>-</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PointTriPE (ours)</strong></td>
+                            <td><strong>87.4</strong></td>
+                            <td><strong>85.1</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Semantic Segmentation Results -->
+            <div class="column">
+                <div class="content">
+                    <p><strong>Semantic segmentation results on ScanNet v2.</strong><br>
+                        Mean IoU (%) on validation and test sets.
+                    </p>
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Val mIoU</th>
+                            <th>Test mIoU</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>O-CNN</td>
+                            <td>74.0</td>
+                            <td>72.8</td>
+                        </tr>
+                        <tr>
+                            <td>PointNet++</td>
+                            <td>53.5</td>
+                            <td>33.9</td>
+                        </tr>
+                        <tr>
+                            <td>PointConv</td>
+                            <td>61.0</td>
+                            <td>55.6</td>
+                        </tr>
+                        <tr>
+                            <td>KpConv</td>
+                            <td>69.2</td>
+                            <td>68.0</td>
+                        </tr>
+                        <tr>
+                            <td>Minkowski</td>
+                            <td>72.2</td>
+                            <td>73.4</td>
+                        </tr>
+                        <tr>
+                            <td>SFormer</td>
+                            <td>74.3</td>
+                            <td>73.7</td>
+                        </tr>
+                        <tr>
+                            <td>BPNet</td>
+                            <td>73.9</td>
+                            <td>74.9</td>
+                        </tr>
+                        <tr>
+                            <td>PTv2</td>
+                            <td>75.4</td>
+                            <td>75.2</td>
+                        </tr>
+                        <tr>
+                            <td>KPConvX-L</td>
+                            <td>76.2</td>
+                            <td>75.6</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PointTriPE (ours)</strong></td>
+                            <td><strong>76.0</strong></td>
+                            <td><strong>75.4</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-variable is-8">
+            <!-- Part Segmentation Results -->
+            <div class="column">
+                <div class="content">
+                <div class="content has-text-centered">
+                    <p><strong>Ablation study on PointLaSA components</strong></p>
+                    <p><small>&#10003; = included, &#10007; = excluded. Metrics are classification accuracy (OA) on
+                        ModelNet40, instance mIoU on ShapeNetPart, and mIoU on ScanNet v2.</small></p>
+                </div>
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Offset</th>
+                            <th>Multi-Head</th>
+                            <th>Multi-Scale</th>
+                            <th>Multi-Dim</th>
+                            <th>ModelNet40 (OA)</th>
+                            <th>ShapeNet (Ins. mIoU)</th>
+                            <th>ScanNet v2 (mIoU)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>94.1%</td>
+                            <td><strong>87.4%</strong></td>
+                            <td><strong>75.4%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td><strong>94.2%</strong></td>
+                            <td>87.2%</td>
+                            <td>75.1%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td><strong>94.2%</strong></td>
+                            <td>87.1%</td>
+                            <td>75.0%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>94.0%</td>
+                            <td>87.0%</td>
+                            <td>74.8%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>93.9%</td>
+                            <td>87.0%</td>
+                            <td>74.6%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>94.0%</td>
+                            <td>87.1%</td>
+                            <td>74.6%</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>93.8%</td>
+                            <td>87.2%</td>
+                            <td>74.4%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td>93.7%</td>
+                            <td>87.0%</td>
+                            <td>74.4%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>&#10007;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>93.6%</td>
+                            <td>86.9%</td>
+                            <td>74.6%</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>93.4%</td>
+                            <td>86.8%</td>
+                            <td>74.2%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+</section>
+</body>
+</html>
